@@ -1,17 +1,19 @@
+   
 Vector = {}
 Vector.__index = Vector
 
 function Vector:create(x, y)
     local vector = {}
     setmetatable(vector, Vector)
+
     vector.x = x
     vector.y = y
+
     return vector
 end
 
 function Vector:__tostring()
-    return "Vector(x = " .. string.format("%.2f", self.x) .. 
-                ", y = " .. string.format("%.2f", self.y) .. ")"
+    return "Vector(x = " .. string.format("%.2f", self.x) .. ", y = " .. string.format("%.2f", self.y) .. ")"
 end
 
 function Vector:__add(other)
@@ -36,9 +38,11 @@ end
 
 function Vector:norm()
     m = self:mag()
-    if (m > 0) then
+    if m > 0 then
         return self / m
-    end    
+    else
+        return nil
+    end
 end
 
 function Vector:mul(value)

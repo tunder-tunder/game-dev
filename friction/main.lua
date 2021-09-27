@@ -6,7 +6,7 @@ function love.load()
     height = love.graphics.getHeight()
     love.graphics.setBackgroundColor(128 / 255, 128 / 255, 128 / 255)
     
-    location = Vector:create(100, height/2)
+    location = Vector:create(200, height/2)
     wlocation = Vector:create(500, height/2)
     velocity = Vector:create(0, 0)
     
@@ -14,11 +14,6 @@ function love.load()
     mover.size = 20
     wmover = Mover:create(wlocation, velocity, 5)
     wmover.size = 20
-
-    -- create rects somehow 
-
-    -- rectangleBlue = 
-    -- rectangleGreen =
 
     wind = Vector:create(0.01, 0)
     isWind = false
@@ -48,20 +43,37 @@ function love.update()
         wmover:applyForce(wind)
     end
 
+-- left rect 
+    if wmover.location.x  > 100 and wmover.location.x + wmover.size < 300 then 
+        if wmover.location.y > 100 and wmover.location.y + wmover.size < 300 then
+            friction1 = (wmover.velocity):norm()
+            friction1:mul(-0.5)
+            wmover:applyForce(friction1)
+        end
+    end 
 
-    if (mover.location.x + mover.size < 100 and mover.location.y + mover.size < 100) then
-        friction = (mover.velocity * -1):norm()
-        if friction then
-            friction:mul(0.05)
+    if mover.location.x  > 100 and mover.location.x + mover.size < 300 then
+        if mover.location.y > 100 and mover.location.y + mover.size < 300 then 
+            friction = (mover.velocity):norm()
+            friction:mul(-0.5)
             mover:applyForce(friction)
+        end
+    end 
+
+-- right rect 
+    if  wmover.location.x  > 400 and wmover.location.x + wmover.size < 600 then
+        if wmover.location.y > 100 and wmover.location.y + wmover.size < 300 then 
+            friction3 = wmover.velocity:norm()
+            friction3:mul(0.05)
+            wmover:applyForce(friction3)
         end
     end
 
-    if (wmover.location.x + wmover.size < 400 and wmover.location.y + wmover.size < 100 ) then
-        friction = wmover.velocity:norm()
-        if friction then
-            friction:mul(-0.05)
-            wmover:applyForce(friction)
+    if mover.location.x  > 400 and mover.location.x + mover.size < 600 then 
+        if mover.location.y > 100 and mover.location.y + mover.size < 300 then
+            friction2 = mover.velocity:norm()
+            friction2:mul(0.05)
+            mover:applyForce(friction2)
         end
     end
     
