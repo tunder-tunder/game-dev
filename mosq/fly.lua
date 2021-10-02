@@ -39,7 +39,7 @@ function HerdFlies:create(image, xmin, xmax, ymin, ymax, n)
 
     flies.n = n
     flies.objs = {}
-    for i=0, n do
+    for i=1, n do
         x = love.math.random(xmin, xmax)
         y = love.math.random(ymin, ymax)
         speed = love.math.random(1, 3)
