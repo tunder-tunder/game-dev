@@ -23,11 +23,11 @@ function Harmony:draw()
         y = y + A * math.sin((self.angle + x / 200) * self.c)
 
         distx = x / self.x1
-        disty = y /(self.height/8)
+        disty = y /(2 *A)
 
         love.graphics.setColor(255, 255, 255)
         love.graphics.circle("line", x, y + self.height, self.r)
-        love.graphics.setColor(distx, 0.8 ,disty , 0.5) 
+        love.graphics.setColor(distx, distx ,disty , 0.5) 
         love.graphics.circle("fill", x, y + self.height, self.r)
         
     end

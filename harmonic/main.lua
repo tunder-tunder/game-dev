@@ -8,8 +8,8 @@ function love.load()
     angleVel = 0.001
     angle = 0.1
     -- harmony = Harmony:create(0 , width - 250, 2, 40, 0.001, 0.1)
-    harmony = Harmony:create(100 , width, 100, 70, 0.001, 0.1, 10)
-    harmony1 = Harmony:create(100 , width, 500, 10, 0.001, 0.1, 5)
+    harmony = Harmony:create(100 , width, 100, 40, 0.001, 0.01, 10)
+    harmony1 = Harmony:create(100 , width, 500, 40, 0.01, 0.1, 5)
 end
 
 function love.update(dt)
