@@ -43,7 +43,7 @@ function ParticleSystem:create(origin, n)
     local system = {}
     setmetatable(system, ParticleSystem)
     system.origin = origin
-    system.n = n or 50
+    system.n = n or 80
     system.cls = cls or Particle
     system.particles = {}
     system.index = 1
@@ -52,6 +52,26 @@ end
 
 function ParticleSystem:applyForce(force)
     for k, v in pairs(system.particles) do
+        v:applyForce(force)
+    end
+end
+
+function ParticleSystem:attraction(x,y)
+    attr_point = Vector:create(x,y)
+    for k, v in pairs(system.particles) do
+        force = attr_point - v.location
+        distance = force:mag()
+        if distance then 
+            force = force:norm()
+            force:mul(0.1)
+            v:applyForce(force)
+        end
+    end
+end
+
+function ParticleSystem:applyRepeller(repeller)
+    for k, v in pairs(self.particles) do
+        local force = repeller:repel(v)
         v:applyForce(force)
     end
 end
