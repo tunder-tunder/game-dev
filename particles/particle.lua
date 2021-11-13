@@ -32,7 +32,7 @@ end
 function Particle:draw()
     r, g, b , a = love.graphics.getColor()
     love.graphics.setColor(1,1,1,self.lifespan / 100)
-    love.graphics.draw(self.texture, self.location.y, self.location.y, 0.1,0.1 )
+    love.graphics.draw(self.texture, self.location.x, self.location.y, 0.1,0.1 )
     love.graphics.setColor(r,g,b,a)
 end
 
@@ -50,6 +50,12 @@ function ParticleSystem:create(origin, n)
     return system
 end
 
+function ParticleSystem:applyForce(force)
+    for k, v in pairs(system.particles) do
+        v:applyForce(force)
+    end
+end
+
 function ParticleSystem:draw()
     love.graphics.circle("line", self.origin.x, self.origin.y, 10)
     for k, v in pairs(system.particles) do
@@ -59,7 +65,6 @@ end
 
 function ParticleSystem:update()
     if #self.particles < self.n then 
-        -- table.insert(self.particles, self.cls:create(self.origin:copy()))
         self.particles[self.index] = self.cls:create(self.origin:copy())
         self.index = self.index + 1
     end
