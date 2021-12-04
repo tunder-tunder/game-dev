@@ -1,3 +1,13 @@
+function math.constrain(v, min, max)
+    if v < min then 
+        return min 
+    elseif v > max then
+        return max
+    end 
+    return v
+end
+
+
 Vector = {}
 Vector.__index = Vector
 
@@ -12,6 +22,8 @@ end
 function Vector:__tostring()
     return "Vector(x = " .. string.format("%.2f", self.x) .. ", y = " .. string.format("%.2f", self.y) .. ")"
 end
+
+
 
 function Vector:__add(other)
     return Vector:create(self.x + other.x, self.y + other.y)
