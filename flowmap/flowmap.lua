@@ -10,22 +10,39 @@ function FlowMap:create(size)
     return map 
 end
 
+
+function spiralCoordinates( fraction, maxRadius, maxTheta )
+    local radius = maxRadius * fraction
+    local theta = maxTheta * fraction
+    return math.cos( theta ) * radius, math.sin( theta ) * radius
+end
+   
 function FlowMap:init()
+    local a=1
+    local b=1
+    local cycles=40
+    local step=0.001
     local cols = width / self.size
     local rows = height / self.size
-    local xoff = 0 
-    local yoff = 0
+    local xoff = love.graphics.getWidth()/2
+    local yoff = love.graphics.getHeight()/2
+  
     for i = 1, cols  do 
-        yoff = 0
         self.field[i] = {}
         for j = 1, rows do 
-            -- self.field[i][j] = Vector:create(1, 1)
-            local theta = math.map(love.math.noise(xoff, yoff), 0, 1, 0, math.pi * 2)
-            self.field[i][j] = Vector:create(math.cos( theta ), 
-                                math.sin( theta ))
-            yoff = yoff + 0.1
+            self.field[i][j] = Vector:create(1, 1)
+            -- local theta = math.map(love.math.noise(xoff, yoff), 0, 1, 0, math.pi * 2)
+
+            -- j = cycles*math.pi
+            for i=0,cycles*math.pi,step do
+              one = xoff+(a + b*i)*math.cos(i)
+              two = yoff+(a + b*i)*math.sin(i)
+           end
+            self.field[i][j] = Vector:create(one, 
+                                            two)
+        
         end
-        xoff = xoff +0.1
+        
     end 
 end
 
